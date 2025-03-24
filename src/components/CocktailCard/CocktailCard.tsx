@@ -1,4 +1,3 @@
-import React from 'react';
 import { Cocktail } from '../../types/cocktail';
 import LazyImage from '../LazyImage/LazyImage';
 import styles from './CocktailCard.module.scss';

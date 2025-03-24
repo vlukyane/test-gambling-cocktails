@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { CocktailCode } from '../../types/cocktail';
 import styles from './Navigation.module.scss';

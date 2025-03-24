@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { CocktailCode } from '../types/cocktail';
 import { useCocktailStore } from '../store/cocktailStore';
