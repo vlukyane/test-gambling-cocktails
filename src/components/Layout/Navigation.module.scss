@@ -2,21 +2,108 @@
   width: 250px;
   background-color: $primary-color;
   box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
-  padding: $spacing-lg 0;
   height: 100%;
   overflow-y: auto;
-  
-  @media (max-width: $mobile) {
-    width: 100%;
-    height: auto;
-    padding: $spacing-md 0;
+  transition: all 0.3s ease;
+
+  @media (max-width: 500px) {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    z-index: 1000;
+
+    &.open {
+      left: 0;
+    }
+  }
+}
+
+.header {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-md;
+  background-color: $primary-color;
+  color: white;
+
+  @media (max-width: 500px) {
+    display: flex;
+  }
+}
+
+.headerTitle {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.headerBurger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $spacing-sm;
+  z-index: 1001;
+
+  @media (max-width: 500px) {
+    display: block;
+  }
+
+  span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+  }
+
+  &.open {
+    span {
+      &:first-child {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      &:nth-child(2) {
+        opacity: 0;
+      }
+      &:last-child {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+    }
+  }
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+
+  @media (max-width: 500px) {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+
+    &.open {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 }
 
 .container {
+  padding: $spacing-lg;
   height: 100%;
   display: flex;
   flex-direction: column;
+  @media (max-width: 500px) {
+    padding-left: $spacing-sm;
+  }
 }
 
 .menu {
@@ -26,20 +113,10 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-sm;
-  
-  @media (max-width: $mobile) {
-    flex-direction: row;
-    overflow-x: auto;
-    padding: 0 $spacing-md;
-  }
 }
 
 .menuItem {
   width: 100%;
-  
-  @media (max-width: $mobile) {
-    width: auto;
-  }
 }
 
 .link {
@@ -48,17 +125,12 @@
   text-decoration: none;
   padding: $spacing-md $spacing-lg;
   transition: background-color 0.2s;
-  
+
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
   }
-  
+
   &.active {
     background-color: $secondary-color;
-  }
-  
-  @media (max-width: $mobile) {
-    padding: $spacing-sm $spacing-md;
-    white-space: nowrap;
   }
 } 

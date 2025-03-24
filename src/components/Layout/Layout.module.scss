@@ -4,10 +4,13 @@
   display: flex;
   justify-content: center;
   padding: $spacing-xl 0;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
 }
 
 .main {
-  flex: 1;
   max-width: 1024px;
   width: 100%;
   height: calc(100vh - (#{$spacing-xl} * 2));
@@ -16,7 +19,7 @@
   border-radius: 8px;
   background-color: white;
   overflow: hidden;
-  
+
   @media (max-width: $mobile) {
     flex-direction: column;
   }
@@ -25,6 +28,7 @@
 .container {
   flex: 1;
   padding: $spacing-lg;
+  overflow-y: auto;
   
   @media (max-width: $mobile) {
     padding: $spacing-md;
