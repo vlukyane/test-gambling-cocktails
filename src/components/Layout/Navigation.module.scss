@@ -1,0 +1,64 @@
+.navigation {
+  width: 250px;
+  background-color: $primary-color;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+  padding: $spacing-lg 0;
+  height: 100%;
+  overflow-y: auto;
+  
+  @media (max-width: $mobile) {
+    width: 100%;
+    height: auto;
+    padding: $spacing-md 0;
+  }
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  
+  @media (max-width: $mobile) {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 0 $spacing-md;
+  }
+}
+
+.menuItem {
+  width: 100%;
+  
+  @media (max-width: $mobile) {
+    width: auto;
+  }
+}
+
+.link {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: $spacing-md $spacing-lg;
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  &.active {
+    background-color: $secondary-color;
+  }
+  
+  @media (max-width: $mobile) {
+    padding: $spacing-sm $spacing-md;
+    white-space: nowrap;
+  }
+} 
