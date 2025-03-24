@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './LazyImage.module.scss';
 
 interface LazyImageProps {
@@ -7,36 +7,42 @@ interface LazyImageProps {
   className?: string;
 }
 
-const createImageComponent = (imageSrc: string) =>
-  new Promise<{ default: React.ComponentType<LazyImageProps> }>((resolve) => {
-    const img = new window.Image();
-    img.src = imageSrc;
-    img.onload = () => {
-      resolve({
-        default: ({ src, alt, className }: LazyImageProps) => (
-          <img 
-            src={src} 
-            alt={alt} 
-            className={className}
-            loading="lazy"
-            decoding="async"
-          />
-        ),
-      });
-    };
-  });
+const LazyImage = ({ src, alt, className }: LazyImageProps) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
-const LazyImage: React.FC<LazyImageProps> = ({ src, alt, className }) => {
-  const Image = lazy(() => createImageComponent(src));
+  useEffect(() => {
+    const img = new Image();
+    img.src = src;
+    
+    img.onload = () => {
+      setIsLoaded(true);
+      setHasError(false);
+    };
+    
+    img.onerror = () => {
+      setHasError(true);
+      setIsLoaded(false);
+    };
+  }, [src]);
+
+  if (hasError) {
+    return (
+      <div className={`${styles.errorPlaceholder} ${className || ''}`}>
+        <span>Error while loading image</span>
+      </div>
+    );
+  }
 
   return (
-    <Suspense 
-      fallback={
-        <div className={`${styles.placeholder} ${className}`} />
-      }
-    >
-      <Image src={src} alt={alt} className={className} />
-    </Suspense>
+    <div className={`${styles.imageContainer} ${className || ''}`}>
+      {!isLoaded && <div className={styles.skeleton} />}
+      <img
+        src={src}
+        alt={alt}
+        className={`${styles.image} ${isLoaded ? styles.loaded : ''}`}
+      />
+    </div>
   );
 };
 
