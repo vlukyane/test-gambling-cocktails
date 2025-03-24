@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
-import CocktailList from './pages/CocktailList';
-import NotFound from './pages/NotFound';
+import CocktailList from './pages/CocktailList/CocktailList.tsx';
+import NotFound from './pages/NotFound/NotFound.tsx';
 import './styles/global.scss';
 
 const App = () => {
@@ -19,4 +19,4 @@ const App = () => {
   );
 };
 
-export default App; 
+export default App;

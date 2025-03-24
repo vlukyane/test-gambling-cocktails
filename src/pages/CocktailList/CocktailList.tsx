@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import { CocktailCode } from '../types/cocktail';
-import { useCocktailStore } from '../store/cocktailStore';
-import CocktailCard from '../components/CocktailCard/CocktailCard';
+import { CocktailCode } from '../../types/cocktail.ts';
+import { useCocktailStore } from '../../store/cocktailStore.ts';
+import CocktailCard from '../../components/CocktailCard/CocktailCard.tsx';
 import styles from './CocktailList.module.scss';
 
 const menuItems: CocktailCode[] = ['margarita', 'mojito', 'a1', 'kir'];
@@ -48,4 +48,4 @@ const CocktailList = () => {
   );
 };
 
-export default CocktailList; 
+export default CocktailList;
