@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { Cocktail, CocktailCode } from '../types/cocktail';
 import { getCocktails } from '../api/cocktailService';
+import { COCKTAIL_CODES } from '../constants/cocktails';
 
 interface CocktailState {
   cocktails: Record<CocktailCode, Cocktail[]>;
@@ -9,13 +10,13 @@ interface CocktailState {
   fetchCocktails: (code: CocktailCode) => Promise<void>;
 }
 
+const initialCocktails = COCKTAIL_CODES.reduce((acc, code) => {
+  acc[code] = [];
+  return acc;
+}, {} as Record<CocktailCode, Cocktail[]>);
+
 export const useCocktailStore = create<CocktailState>((set, get) => ({
-  cocktails: {
-    margarita: [],
-    mojito: [],
-    a1: [],
-    kir: [],
-  },
+  cocktails: initialCocktails,
   loading: false,
   error: null,
 
