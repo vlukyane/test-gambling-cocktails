@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import styles from './LazyImage.module.scss';
 
 interface LazyImageProps {
@@ -46,4 +46,4 @@ const LazyImage = ({ src, alt, className }: LazyImageProps) => {
   );
 };
 
-export default LazyImage; 
+export default lazy(() => Promise.resolve({ default: LazyImage })); 

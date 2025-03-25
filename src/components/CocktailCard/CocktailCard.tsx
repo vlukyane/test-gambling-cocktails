@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Cocktail } from '../../types/cocktail';
 import LazyImage from '../LazyImage/LazyImage';
 import styles from './CocktailCard.module.scss';
@@ -25,10 +26,6 @@ const CocktailCard = ({ cocktail }: CocktailCardProps) => {
             <p className={styles.type}>{cocktail.strAlcoholic}</p>
             <p className={styles.glass}>{cocktail.strGlass}</p>
           </div>
-          <div className={styles.instructions}>
-            <h3 className={styles.instructionsTitle}>Instructions</h3>
-            <p>{cocktail.strInstructions}</p>
-          </div>
           <div className={styles.ingredients}>
             <h3 className={styles.ingredientsTitle}>Ingredients</h3>
             <ul className={styles.ingredientsList}>
@@ -40,13 +37,19 @@ const CocktailCard = ({ cocktail }: CocktailCardProps) => {
               ))}
             </ul>
           </div>
+          <div className={styles.instructions}>
+            <h3 className={styles.instructionsTitle}>Instructions</h3>
+            <p>{cocktail.strInstructions}</p>
+          </div>
         </div>
         <div className={styles.imageContainer}>
-          <LazyImage
-            src={cocktail.strDrinkThumb}
-            alt={cocktail.strDrink}
-            className={styles.image}
-          />
+          <Suspense>
+            <LazyImage
+              src={cocktail.strDrinkThumb}
+              alt={cocktail.strDrink}
+              className={styles.image}
+            />
+          </Suspense>
         </div>
       </div>
     </div>
