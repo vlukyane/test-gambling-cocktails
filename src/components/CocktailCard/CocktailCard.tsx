@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { Cocktail } from '../../types/cocktail';
 import LazyImage from '../LazyImage/LazyImage';
+import { getCocktailIngredients } from '../../utils/cocktailUtils';
 import styles from './CocktailCard.module.scss';
 
 interface CocktailCardProps {
@@ -8,13 +9,7 @@ interface CocktailCardProps {
 }
 
 const CocktailCard = ({ cocktail }: CocktailCardProps) => {
-  const ingredients = Object.entries(cocktail)
-    .filter(([key, value]) => key.startsWith('strIngredient') && value)
-    .map(([key, value]) => {
-      const measureKey = key.replace('Ingredient', 'Measure');
-      const measure = cocktail[measureKey];
-      return { ingredient: value, measure };
-    });
+  const ingredients = getCocktailIngredients(cocktail);
 
   return (
     <div className={styles.card}>
